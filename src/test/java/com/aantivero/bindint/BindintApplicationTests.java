@@ -3,6 +3,8 @@ package com.aantivero.bindint;
 import com.aantivero.bindint.cuenta.CuentaClient;
 import com.aantivero.bindint.cuenta.model.Cuenta;
 import com.aantivero.bindint.cuenta.model.Movimiento;
+import com.aantivero.bindint.debin.DebinClient;
+import com.aantivero.bindint.debin.model.Adhesion;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -17,6 +19,7 @@ public class BindintApplicationTests {
 
 	private BindintApplication.LoginClient loginClient;
 	private CuentaClient cuentaClient;
+	private DebinClient debinClient;
 
 	private String bank_id = "322";
 	private String token = "JWT eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJYTnhaa0swK1I3aldLMGtUM0d4UnRDajBOaURBQzVGUVRuaUVNZ0lFcUVNPSIsImNyZWF0ZWQiOjE1Mjc2MDEzNDg3MzEsIm5hbWUiOiJBbGVqYW5kcm8gQWxiZXJ0byBBbnRpdmVybyIsImV4cCI6MTUyNzYzMDE0OH0.QNgZTOLPZl8twOdxzjNS7Mzt3Hkzgth7h3fg8SfW0RMRQwx5HkLTKCYfYE4u6zRNZuVEoIfveDuLxgL6w2Txiw";
@@ -26,6 +29,7 @@ public class BindintApplicationTests {
 		FeignClientBuilder builder = new FeignClientBuilder();
 		loginClient = builder.getLoginClient();
 		cuentaClient = builder.getCuentaClient();
+		debinClient = builder.getDebinClient();
 	}
 
 	@Test
@@ -61,6 +65,18 @@ public class BindintApplicationTests {
 			}
 			System.out.println("-----------END CONSULTA DE MOVIMIENTOS------------------------");
 		}
+	}
+
+	@Test
+	public void debinAltaDeCuentaVendedor() {
+		Adhesion adhesion = debinClient.altaBajaDeCuentaVendedor("322", "21-1-99999-4-6", "owner", token, true);
+		System.out.println(adhesion);
+	}
+
+	@Test
+	public void debinBajaDeCuentaVendedor() {
+		Adhesion adhesion = debinClient.altaBajaDeCuentaVendedor("322", "21-1-99999-4-6", "owner", token, false);
+		System.out.println(adhesion);
 	}
 
 }

@@ -2,6 +2,7 @@ package com.aantivero.bindint;
 
 import com.aantivero.bindint.cuenta.CuentaClient;
 import com.aantivero.bindint.cuenta.model.Cuenta;
+import com.aantivero.bindint.debin.DebinClient;
 import feign.Feign;
 import feign.Logger;
 import feign.gson.GsonDecoder;
@@ -18,6 +19,7 @@ public class FeignClientBuilder {
 
     private BindintApplication.LoginClient loginClient = createClient(BindintApplication.LoginClient.class, "https://sandbox.bind.com.ar/v1");
     private CuentaClient cuentaClient = createClient(CuentaClient.class, "https://sandbox.bind.com.ar/v1");
+    private DebinClient debinClient = createClient(DebinClient.class, "https://sandbox.bind.com.ar/v1");
 
     private static <T> T createClient(Class<T> type, String uri) {
         Proxy proxy = new Proxy(Proxy.Type.HTTP, new InetSocketAddress("pfcajavip.cajval.sba.com.ar", 3128));
